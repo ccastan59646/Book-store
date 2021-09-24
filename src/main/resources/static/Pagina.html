@@ -1,0 +1,37 @@
+</head>
+<body>
+
+<h1>Crear nuevo libro</h1>
+
+<form>
+    titulo: <input type="text" id="titulo"><br>
+    autor: <input type="text" id="autor"><br>
+    Precio: <input type="number" id="precio"><br>
+    cantidad: <input type="number" id="cantidad"><br>
+    categoría: <input type="text" id="categoría"><br>
+    <button onclick="guardarLibro()">Guardar</button>>
+</form>
+
+<script lang="javascript">
+    async function guardarLibro(){
+       let datos = { };
+       datos.titulo = document.getElementById("titulo").value;
+       datos.autor = document.getElementById("autor").value;
+       datos.precio = document.getElementById("precio").value;
+       datos.cantidad = document.getElementById("cantidad").value;
+       datos.categoría = document.getElementById("categoría").value;
+
+       const resultado = await fetch('/libro', {
+            method: 'POST' ,
+            headers:{
+                'Accept': 'application/json',
+                'content-type: 'application/json'
+            },
+            body: JSON.stringify(datos)
+       }).then(info => console.log(info));
+       alert ("El libro se creo con éxito!")
+    }
+</script>
+</body>
+</html>
+
