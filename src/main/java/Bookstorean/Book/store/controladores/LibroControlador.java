@@ -17,7 +17,7 @@ public class LibroControlador {
     @PostMapping("/libro")
     public ResponseEntity<String> crearLibro(@RequestBody Libro libro){
         Long numeroLibro = servicio.crearLibro(libro);
-        return new ResponseEntity<>("El libro se creo exitosamente "+ numeroLibro, 
+        return new ResponseEntity<>("El libro se ha creado exitosamente "+ numeroLibro,
                 HttpStatus.CREATED);
     }
 
@@ -27,5 +27,21 @@ public class LibroControlador {
         return servicio.obtenerLibro(numeroLibro);
 
     }
+
+    @DeleteMapping("/libro/{numeroLibro}")
+    private ResponseEntity<String> eliminarLibro(@PathVariable("numeroLibro") Long numeroLibro) {
+        servicio.eliminarLibro(numeroLibro);
+        return new ResponseEntity<>("El libro se ha eliminado exitosamente con ISBN: " + numeroLibro,
+                HttpStatus.OK);
+    }
+
+
+    @PutMapping("/libro")
+    private ResponseEntity<String> actualizarLibro(@RequestBody Libro libro) {
+        servicio.actualizarLibro(libro);
+        return new ResponseEntity<>("El libro se ha actualizado exitosamente con el título: " + libro.getTitulo(),
+                HttpStatus.OK);
+    }
+
 }
 

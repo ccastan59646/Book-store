@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Book Store</title>
+</head>
+
+<body>
+
+<h1>Crear nuevo libro</h1>
+<div class="container">
+    <div class="row">
+        <form>
+            <div class="form-group">
+                titulo: <label for="titulo"></label><input class="form-control" type="text" id="titulo"><br>
+                autor: <input  class="form-control" type="text" id="autor"><br>
+                Precio: <input  class="form-control" type="number" id="precio"><br>
+                cantidad: <input  class="form-control" type="number" id="cantidad"><br>
+                categoría: <input  class="form-control" type="text" id="categoría"><br>
+                <button onclick="crearLibro()">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script lang="javascript">
+    async function crearLibro(){
+       let datos = { };
+       datos.titulo = document.getElementById("titulo").value;
+       datos.autor = document.getElementById("autor").value;
+       datos.precio = document.getElementById("precio").value;
+       datos.cantidad = document.getElementById("cantidad").value;
+       datos.categoría = document.getElementById("categoría").value;
+
+       const resultado = await fetch('/libro', {
+            method: 'POST',
+            headers:{
+                'Accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+       }).then(info => console.log(info));
+       alert ("El libro se creo con éxito!");
+    }
+</script>
+</body>
+</html>
+

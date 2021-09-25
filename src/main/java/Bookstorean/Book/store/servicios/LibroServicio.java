@@ -21,10 +21,16 @@ public class LibroServicio {
         return nuevoLibro.getISBN();
     }
     //Retorna un libro con el numero dado
-    public Optional<Libro> obtenerLibro(Long numeroLibro){
+    public Optional<Libro> obtenerLibro(Long numeroLibro) {
         return repositorio.findById(numeroLibro);
+    }
 
+    public void eliminarLibro(Long numeroLibro) {
+        repositorio.deleteById(numeroLibro);
+    }
 
+    public void actualizarLibro(Libro c) {
+        repositorio.save(c);
     }
 
 }
